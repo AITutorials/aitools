@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='pyaitools',
-    version='1.4.5',
+    version='1.4.4',
     description='AI tools-code!',
     url='https://github.com/AITutorials/aitools/',
     author='Stephen.Z',

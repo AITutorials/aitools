@@ -1,4 +1,4 @@
-README.rst
+README.md
 setup.cfg
 setup.py
 pyaitools/__init__.py
