@@ -1,0 +1,14 @@
+LICENSE
+MANIFEST.in
+README.rst
+requirements.txt
+setup.cfg
+setup.py
+pyaitools/__init__.py
+pyaitools/detect.py
+pyaitools/loss.py
+pyaitools/weight_pooled_output.py
+pyaitools.egg-info/PKG-INFO
+pyaitools.egg-info/SOURCES.txt
+pyaitools.egg-info/dependency_links.txt
+pyaitools.egg-info/top_level.txt

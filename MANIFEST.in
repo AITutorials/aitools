@@ -1,0 +1,6 @@
+include README.rst
+include requirements.txt
+include LICENSE
+
+recursive-include pyoneline
+recursive-include multiprocessing
