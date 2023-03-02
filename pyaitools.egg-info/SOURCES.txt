@@ -1,7 +1,4 @@
-LICENSE
-MANIFEST.in
 README.rst
-requirements.txt
 setup.cfg
 setup.py
 pyaitools/__init__.py
