@@ -24,12 +24,11 @@
 
 
 * 下载：
-	* 必须下载1.4.4版本以上才有语料检测功能！
+	* 必须下载1.4.6版本以上才有语料检测功能！
 
 ```shell
-pip install pyaitools==1.4.4
+pip install pyaitools==1.4.6
 ```
-
 
 
 * 使用：
