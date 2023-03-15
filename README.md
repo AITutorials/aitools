@@ -30,8 +30,6 @@
 pip install pyaitools==1.4.6
 ```
 
-或
-
 ```shell
 pip install pyaitools==1.4.6 -i https://pypi.org/simple/
 ```
@@ -106,15 +104,13 @@ sentence1,sentence2,relation
 
 2, 快速使用：
 
-
 * 下载：
-        * 必须下载1.4.8版本以上才有该功能!
+	* 必须下载1.4.8版本以上才有该功能!
 
 ```shell
 pip install pyaitools==1.4.8
 ```
 
-或
 
 ```shell
 pip install pyaitools==1.4.8 -i https://pypi.org/simple/
