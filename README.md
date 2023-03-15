@@ -3,7 +3,7 @@
 <!--https://www.miniits.com/logo.html-->
 
 
-![](./img/MiniLogo.png)
+![](./img/Logo.png)
 
 
 <!-- 
