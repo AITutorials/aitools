@@ -3,8 +3,12 @@
 <!--https://www.miniits.com/logo.html-->
 
 <center>
-<img src="./img/MiniLogo.png" width="auto" height="auto">
+![](./img/MiniLogo.png)
 </center>
+
+< !-- 
+<img src="./img/MiniLogo.png" width="auto" height="auto">
+-->
 
 ## 简单，快捷的AI模型训练和语料处理小工具集合～
 
