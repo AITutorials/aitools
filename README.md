@@ -94,13 +94,57 @@ sentence1,sentence2,relation
 > * 2，标签列必须是最后一列，而且该检测只针对二分类，标签必须只有两种
 > * 3，内容列+标签列的列名随意
 
+---
+
+### 二，通过文本相似关系进行聚类
 
 
+1，背景
+
+* 对于任意多段文本，已知他们之间所有相似关系（是否相似），希望输出具有相似关系的N个类，N由具体相似关系决定；假设我们只有三条文本A，B，C，其中只有A，B是相似的，那么输出则为[{A, B}, {C}]两个类，若不止A，B是相似的，A，C也是相似的，那么输出为[{A, B, C}]只有一个类。
 
 
+2, 快速使用：
 
 
+* 下载：
+        * 必须下载1.4.8版本以上才有该功能!
+
+```shell
+pip install pyaitools==1.4.8
+```
+
+或
+
+```shell
+pip install pyaitools==1.4.8 -i https://pypi.org/simple/
+```
 
 
+* 使用：
+
+```python
+from pyaitools import similar
+
+# 任意一组文本
+input_list = ["A","B","C","A"]
+# 与input_list具有1vs1相似关系的文本
+# 如："A"与"a"是相似的，"B"与"b"是相似的等等
+similar_input_list = ["a","b","c","b"]
+c_list = similar.find_connected_area(input_list, similar_input_list)
+print(c_list)
+```
 
 
+> * 输出：
+
+```text
+[{'a', 'A', 'b', 'B'}, {'c', 'C'}]
+```
+
+* 参数：
+> * input_list: 必须写, 文本组成的列表，相似文本对的一部分
+> * similar_input_list: 必须写, 文本组成的列表，相似文本对的另外一部分
+> * connected_area_min_num: 输出连通区域（集合）中最少的文本数量，为了避免输出内容过多，可以通过该参数进行过滤，少于该数字的集合将不会输出，默认为0
+
+---

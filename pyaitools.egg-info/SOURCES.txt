@@ -4,6 +4,8 @@ setup.py
 pyaitools/__init__.py
 pyaitools/detect.py
 pyaitools/loss.py
+pyaitools/similar.py
+pyaitools/theT.py
 pyaitools/weight_pooled_output.py
 pyaitools.egg-info/PKG-INFO
 pyaitools.egg-info/SOURCES.txt
