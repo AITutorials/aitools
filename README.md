@@ -2,11 +2,9 @@
 
 <!--https://www.miniits.com/logo.html-->
 
-<div width:100%; height:auto>
 
-![](./img/MiniLogo.png)
+<img src="./img/MiniLogo.png" width="100%" height="auto">
 
-</div>
 
 ## 简单，快捷的AI模型训练和语料处理小工具集合～
 
