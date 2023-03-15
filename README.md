@@ -2,9 +2,13 @@
 
 <!--https://www.miniits.com/logo.html-->
 
+<div>
+
+![](./img/MiniLogo.png)
+![](./img/MiniLogo.png)
 ![](./img/MiniLogo.png)
 
-
+</div>
 
 ## 简单，快捷的AI模型训练和语料处理小工具集合～
 
