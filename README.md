@@ -3,7 +3,7 @@
 <!--https://www.miniits.com/logo.html-->
 
 <center>
-<img src="./img/MiniLogo.png" width="70%" height="auto">
+<img src="./img/MiniLogo.png" width="auto" height="auto">
 </center>
 
 ## 简单，快捷的AI模型训练和语料处理小工具集合～
