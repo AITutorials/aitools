@@ -2,10 +2,8 @@
 
 <!--https://www.miniits.com/logo.html-->
 
-<div>
+<div width:100%; height:auto>
 
-![](./img/MiniLogo.png)
-![](./img/MiniLogo.png)
 ![](./img/MiniLogo.png)
 
 </div>
