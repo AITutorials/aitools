@@ -25,8 +25,8 @@ def find_connected_area(input_list, similar_input_list, connected_area_min_num=0
 
 
 if __name__ == "__main__":
-    input_list = ["A","B","C"]
-    similar_input_list = ["a","b","c"]
+    input_list = ["A","B","C","A"]
+    similar_input_list = ["a","b","c","b"]
     c_list = find_connected_area(input_list, similar_input_list)
     print(c_list)
     # [{'A', 'a'}, {'B', 'b'}, {'c', 'C'}]
