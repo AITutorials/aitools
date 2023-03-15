@@ -2,11 +2,9 @@
 
 <!--https://www.miniits.com/logo.html-->
 
-<center>
 
 ![](./img/MiniLogo.png)
 
-</center>
 
 <!-- 
 <img src="./img/MiniLogo.png" width="auto" height="auto">
