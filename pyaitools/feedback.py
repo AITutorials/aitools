@@ -113,7 +113,7 @@ def get_modification_rate_and_content(
             # 对工程id字典进行计算
             all_pid_dict.update(_calc(p_dict))
 
-    total_number, error_number, max_num, _ = np.sum(
+    total_number, error_number, max_num, modify_content = np.sum(
         list(all_pid_dict.values()), axis=0, keepdims=False
     )
     modification_rate = round((total_number - error_number) / max_num, 4)
@@ -121,6 +121,7 @@ def get_modification_rate_and_content(
     # print(f"触发文件数: {len(file_path_list)}")
 
     return (
+        modify_content,
         modification_rate,
         len(all_pid_dict),
         total_number,
@@ -153,6 +154,7 @@ if __name__ == "__main__":
     # 因为推荐内容不一定存在，埋点中可能缺失对应的列，需要指定内容标识
     recommend_content_substitute = "error"
     (
+        modify_content,
         modification_rate,
         pid_num,
         total_number,
@@ -170,9 +172,10 @@ if __name__ == "__main__":
         content_interval_mark,
         recommend_content_substitute,
     )
+    print(f"修改内容:{modify_content}")
     print(f"修改率:{modification_rate}")
     print(f"触发工程数: {pid_num}")
     print(f"总修改数:{total_number}")
     print(f"误修改数:{error_number}")
-    print(f"最大清单总数:{max_num}")
+    print(f"最大分母数:{max_num}")
 
