@@ -10,7 +10,7 @@
 <img src="./img/MiniLogo.png" width="auto" height="auto">
 -->
 
-## 简单，快捷的AI模型训练和语料处理小工具集合～
+## 简单快捷的人工智能相关小工具集合～
 
 
 
