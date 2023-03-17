@@ -23,5 +23,11 @@ setup(
     ],
     keywords='python ai tools',
     packages = find_packages(exclude = ['MANIFEST.in']),
-    include_packages_data = True
+    include_packages_data = True,
+    entry_points={
+        'console_scripts': [
+            'god=pyaitools.guard:run',
+        ],
+       }   
+
     )   
