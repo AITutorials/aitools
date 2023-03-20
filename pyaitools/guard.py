@@ -36,8 +36,8 @@ def job(uri, res, comm, sec, timeout):
 
 def run():
     parser = argparse.ArgumentParser(add_help=True)
-    parser.add_argument("--uri", "-u", help="侦测的服务接口请求地址（如：http://0.0.0.0:8008）!")
-    parser.add_argument("--comm", "-c", help="侦测失败后服务重启的shell命令!")
+    parser.add_argument("--uri", "-u", required=True, help="侦测的服务接口请求地址（如：http://0.0.0.0:8008）!")
+    parser.add_argument("--comm", "-c", required=True, help="侦测失败后服务重启的shell命令!")
     parser.add_argument("--sec", "-s", default=5, help="侦测的时间间隔, 单位为秒, 默认为5s!")
     parser.add_argument(
         "--timeout", "-t", default=10, help="侦测的服务接口超时时间, 单位为秒, 默认为10s!"
@@ -49,21 +49,10 @@ def run():
     comm = args.comm
     sec = args.sec
     timeout = args.timeout
-    if not uri or not comm:
-        print("必要的参数缺失!")
-        explain()
-        return
     scheduler = BlockingScheduler()
     scheduler.add_job(job, "interval", seconds=5, args=[uri, res, comm, sec, timeout])
     scheduler.start()
 
-
-def explain():
-    print("--uri 侦测的服务接口请求地址")
-    print("--comm 侦测失败后服务重启的shell命令")
-    print("--sec 侦测的时间间隔, 单位为秒, 默认为5s")
-    print("--timeout 侦测的服务接口超时时间, 单位为秒, 默认为10s")
-    print("--res 服务接口返回的结果（字符串）, 如果存在此参数，说明要求接口即需要满足正常响应同时结果也要对得上, 默认为None")
 
 if __name__ == "__main__":
     run()
