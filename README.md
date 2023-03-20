@@ -303,10 +303,10 @@ def test():
 #### 3, 快速使用
 
 * 下载：
-	* 必须下载1.4.11版本以上才有该功能!
+	* 必须下载1.4.12版本以上才有该功能!
 
 ```shell
-pip install pyaitools==1.4.11
+pip install pyaitools==1.4.12
 ```
 
 
@@ -315,12 +315,12 @@ pip install pyaitools==1.4.11
 
 ```shell
 # --uri/-u 侦测的服务接口请求地址
-# --res/-r 服务接口返回的结果（字符串）
 # --comm/-c 侦测失败后服务重启的shell命令
 # --sec/-s 侦测的时间间隔, 单位为秒, 默认为5s
 # --timeout/-t 侦测的服务接口超时时间, 单位为秒, 默认为10s
+# --res/-r 服务接口返回的结果（字符串）, 默认为None
 
-god -u "http://8.142.6.226/test/" -r "OK" -c "supvisorctl restart all"
+god -u "http://8.142.6.226/test/" -c "supvisorctl restart all"
 ```
 
 
@@ -330,7 +330,7 @@ god -u "http://8.142.6.226/test/" -r "OK" -c "supvisorctl restart all"
 
 ```shell
 [program:choke_monitor]
-command=god -u "http://8.142.6.226/test/" -r "OK" -c "supvisorctl restart all"
+command=god -u "http://8.142.6.226/test/" -c "supvisorctl restart all"
 ```
 
 
@@ -350,7 +350,12 @@ command=god -u "http://8.142.6.226/test/" -r "OK" -c "supvisorctl restart all"
 
 * 参数：
 > * --uri/-u 侦测的服务接口请求地址
-> * --res/-r 服务接口返回的结果（字符串）
 > * --comm/-c 侦测失败后服务重启的shell命令
 > * --sec/-s 侦测的时间间隔, 单位为秒, 默认为5s
 > * --timeout/-t 侦测的服务接口超时时间, 单位为秒, 默认为10s
+> * --res/-r 服务接口返回的结果（字符串）, 默认为None, 若存在，则会判断真实返回结果是否与其一致，如果不一致，也会执行服务重启命令
+
+
+
+* 相关工具：
+	* [superlance](https://github.com/Supervisor/superlance)
