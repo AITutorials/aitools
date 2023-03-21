@@ -1,56 +1,16 @@
+import os
 import math
+import argparse
 from locust import HttpUser, TaskSet, task, constant
 from locust import LoadTestShape
+from stress_config import *
 
-
-sample = {"content": {
-    "match_threshold": 50,
-    "use_index": 0,
-    "enterprise_list": [
-        {
-            "id": 5,
-            "description": "多孔砖墙",
-            "spec": "1)砖品种:页岩烧结多孔砖;2)墙体厚度、砌块规格、砂浆强度等级、配合比:综合考虑,且满足图纸及设计规范要求;"
-        },
-        {
-          "id": 1232,
-          "description": "多孔砖墙",
-          "spec": "综合考虑,且满足图纸及设计规范要求;"
-}
-    ],
-    "user_list": [
-        {
-            "uid": 5,
-            "description": "多孔砖墙",
-            "spec": "1)砖品种:页岩烧结多孔砖;2)墙体厚度、砌块规格、砂浆强度等级、配合比:综合考虑,且满足图纸及设计规范要求;"
-        },
-        {
-           "uid": 1232,
-           "description": "多孔砖墙",
-           "spec": "综合考虑,且满足图纸及设计规范要求;"
-        }
-    ]} 
-}
-url = "http://8.142.6.226/lp/text_compare/"
-
-
-#  method=None, url=None, headers=None, files=None, data=None,
-#  params=None, auth=None, cookies=None, hooks=None, json=None
-request_body = {"json": sample, "url": url}
-
-# 请求时间间隔
-step_time = 30
-# 每次增加的用户数
-step_load = 1
-# 起始用户数
-spawn_rate = 1
-# 总体时间
-time_limit = 300
 
 class UserTasks(TaskSet):
     @task
     def get_root(self):
         self.client.request(**request_body)
+
 
 class WebsiteUser(HttpUser):
     wait_time = constant(0.5)
@@ -76,3 +36,26 @@ class StepLoadShape(LoadTestShape):
         current_step = math.floor(run_time / step_time) + 1
         return (current_step * step_load, spawn_rate)
 
+
+def main():
+    parser = argparse.ArgumentParser(add_help=True)
+    parser.add_argument(
+        "--uri", "-u", required=True, help="本地浏览器打开地址", default="http://0.0.0.0:80"
+    )
+    parser.add_argument("--config", "-c", required=True, help="压测服务的配置文件路径")
+    args = parser.parse_args()
+    uri = args.uri
+    uri_port = uri.replace("http://", "").replace("https://", "").split(":")
+    config = args.config
+    # 获取当前文件所在路径
+    config_file = os.path.abspath(__file__)
+    new_config = "/".join(config_file.split("/")[:-1] + ["stress_config.py"])
+    comm = f"cp {config} {new_config}"
+    os.system(comm)
+    from stress_config import url
+    comm = f"locust -f {config_file} --host {url} --web-host={uri_port[0]} --web-port={uri_port[1]}"
+    os.system(comm)
+
+
+if __name__ == "__main__":
+    main()

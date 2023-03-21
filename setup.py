@@ -27,6 +27,7 @@ setup(
     entry_points={
         'console_scripts': [
             'god=pyaitools.guard:run',
+            'luc=pyaitools.stress:main'
         ],
        }   
 

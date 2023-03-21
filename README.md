@@ -108,6 +108,13 @@ sentence1,sentence2,relation
 
 #### 2, 快速使用：
 
+* 依赖：
+
+```shell
+pip install networkx==2.3 
+```
+
+
 * 下载：
 	* 必须下载1.4.8版本以上才有该功能!
 
@@ -302,11 +309,18 @@ def test():
 
 #### 3, 快速使用
 
-* 下载：
-	* 必须下载1.4.12版本以上才有该功能!
+* 依赖：
 
 ```shell
-pip install pyaitools==1.4.12
+pip install apscheduler==3.9.1
+```
+
+
+* 下载：
+	* 必须下载1.4.13版本以上才有该功能!
+
+```shell
+pip install pyaitools==1.4.13
 ```
 
 
@@ -359,3 +373,82 @@ command=god -u "http://8.142.6.226/test/" -c "supvisorctl restart all"
 
 * 相关工具：
 	* [superlance](https://github.com/Supervisor/superlance)
+
+
+---
+
+
+### 五, AI服务压力测试工具
+
+#### 1，背景
+
+* AI服务上线前都需要对服务进行压力测试，获取服务的RPS（QPS）和RT的指标，以免影响线上稳定。在python中我们一般使用***Locust***进行压测，但还是需要有一定的开发量，该工具对Locust进行封装，一行启动代码后，便可以开启Locust浏览器界面，监控压力测试效果。
+
+
+#### 2, 快速使用
+
+* 依赖：
+
+```shell
+pip install locust==2.15.1
+```
+
+
+* 下载：
+	* 必须下载1.4.13版本以上才有该功能!
+
+```shell
+pip install pyaitools==1.4.13
+```
+
+
+* 使用：
+	* 当你下载完这个工具包之后，你将得到shell命令：luc
+
+```shell
+# -u/--uri: 本地打开locus浏览器模式的地址
+# -c/--config: 压测服务的配置文件路径 
+luc -u http://0.0.0.0:8089 -c stress_config.py
+```
+
+
+> * stress_config.py
+
+```python
+# 导入测试用例
+from sample import sample
+
+# 目标服务的请求地址
+url = "http://8.142.6.226/lp/text_compare/"
+
+# 请求体可以包含以下参数：（参考requests）method，url，headers，files，data，params，auth，cookies，hooks，json
+request_body = {"method": "POST", "url": url, "json": sample}
+
+
+#### 压力测试的相关配置
+
+# 请求时间间隔
+step_time = 30
+# 每次增加的用户数
+step_load = 1
+# 起始用户数
+spawn_rate = 1
+# 总体时间
+time_limit = 300
+
+## 注意：不要修改url，request_body，step_time，step_load，spawn_rate，time_limit这些名字，只需要更改值就可以了
+```
+
+> * 输出：
+
+```
+[2023-03-21 09:42:11,655] zhoumingzhendeMacBook-Air.local/INFO/locust.main: Starting web interface at http://0.0.0.0:8089 (accepting connections from all network interfaces)
+[2023-03-21 09:42:11,677] zhoumingzhendeMacBook-Air.local/INFO/locust.main: Starting Locust 2.15.1
+```
+
+> * 打开浏览器即可开始监控压测效果
+
+![](./img/l1.png)
+![](./img/l2.png)
+
+

@@ -291,9 +291,9 @@ if __name__ == "__main__":
 
     _, res = find_the_minimum_closed_interval(h_l, v_l)
     print(len(res))
-    
+
     # path为图片路径;(cv读取的文件为BGR形式)
-    # picture = cv2.imread(str(path))      
+    # picture = cv2.imread(str(path))
     # for jx in res:
     #    cv2.rectangle(picture, jx[1], jx[3], (255, 0, 255), 2)
     # cv2.imwrite("new.png", picture)

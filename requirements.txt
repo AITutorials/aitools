@@ -1,3 +1,4 @@
+locust==2.15.1
 apscheduler==3.9.1
 numpy==1.21.6
 pandas==0.24.2
