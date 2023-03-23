@@ -398,7 +398,7 @@ pip install locust==2.15.1
 	* 必须下载以下版本以上才有该功能!
 
 ```shell
-pip install pyaitools==1.4.15
+pip install pyaitools==1.4.16
 ```
 
 
@@ -406,9 +406,8 @@ pip install pyaitools==1.4.15
 	* 当你下载完这个工具包之后，你将得到shell命令：luc
 
 ```shell
-# -u/--uri: 本地打开locus浏览器模式的地址
 # -c/--config: 压测服务的配置文件路径 
-luc -u http://0.0.0.0:8089 -c stress_config.py
+luc -c stress_config.py
 ```
 
 
@@ -427,28 +426,20 @@ request_body = {"method": "POST", "url": url, "json": sample}
 
 #### 压力测试的相关配置
 
-# 请求时间间隔
-step_time = 30
-# 每次增加的用户数
-step_load = 1
-# 起始用户数
-spawn_rate = 1
+# 最大并发数
+max_rps = 8
+
+# 攀升时间
+spawn_time = 10
+
 # 总体时间
 time_limit = 300
 
-## 注意：不要修改url，request_body，step_time，step_load，spawn_rate，time_limit这些名字，只需要更改值就可以了
+## 注意：不要修改url，request_body，time_limiti等这些名字，只需要更改值就可以了
 ```
 
 > * 输出：
 
+```text
+
 ```
-[2023-03-21 09:42:11,655] zhoumingzhendeMacBook-Air.local/INFO/locust.main: Starting web interface at http://0.0.0.0:8089 (accepting connections from all network interfaces)
-[2023-03-21 09:42:11,677] zhoumingzhendeMacBook-Air.local/INFO/locust.main: Starting Locust 2.15.1
-```
-
-> * 打开浏览器即可开始监控压测效果
-
-![](./img/l1.png)
-![](./img/l2.png)
-
-

@@ -6,40 +6,14 @@ from os.path import basename
 from os.path import exists
 from types import ModuleType
 import math
-from locust import HttpUser, TaskSet, task, constant
-from locust import LoadTestShape
+from locust import HttpUser, TaskSet, task, constant, task, events
 
+import gevent
+from locust.env import Environment
+from locust.stats import stats_printer, stats_history
+from locust.log import setup_logging
 
-class UserTasks(TaskSet):
-    @task
-    def get_root(self):
-        self.client.request(**request_body)
-
-
-class WebsiteUser(HttpUser):
-    wait_time = constant(0.5)
-    tasks = [UserTasks]
-
-
-
-class StepLoadShape(LoadTestShape):
-    """
-    A step load shape
-    Keyword arguments:
-        step_time -- Time between steps
-        step_load -- User increase amount at each step
-        spawn_rate -- Users to stop/start per second at every step
-        time_limit -- Time limit in seconds
-    """
-
-    def tick(self):
-        run_time = self.get_run_time()
-
-        if run_time > time_limit:
-            return None
-
-        current_step = math.floor(run_time / step_time) + 1
-        return (current_step * step_load, spawn_rate)
+setup_logging("INFO", None)
 
 
 def load_package_from_path(pkg_path: str, config_name) -> ModuleType:
@@ -59,13 +33,11 @@ def load_package_from_path(pkg_path: str, config_name) -> ModuleType:
 
 def main():
     parser = argparse.ArgumentParser(add_help=True)
-    parser.add_argument(
-        "--uri", "-u", required=True, help="本地浏览器打开地址", default="http://0.0.0.0:80"
-    )
+    #parser.add_argument(
+    #    "--uri", "-u", required=True, help="本地浏览器打开地址", default="0.0.0.0:80"
+    #)
     parser.add_argument("--config", "-c", required=True, help="压测服务的配置文件名")
     args = parser.parse_args()
-    uri = args.uri
-    uri_port = uri.replace("http://", "").replace("https://", "").split(":")
     config = args.config
     path = os.getcwd()
     import sys
@@ -73,19 +45,58 @@ def main():
     from stress_config import (
         url,
         request_body,
-        step_time,
-        step_load,
-        spawn_rate,
+        max_rps,
+        spawn_time,
         time_limit,
     )
-    global request_body
-    global step_time
-    global step_load
-    global spawn_rate
-    global time_limit
-    comm = f"locust -f {os.path.abspath(__file__)} --host {url} --web-host={uri_port[0]} --web-port={uri_port[1]}"
-    os.system(comm)
 
+    class UserTasks(TaskSet):
+        @task
+        def get_root(self):
+            res = self.client.request(**request_body)
+            if res.status_code != 200:
+                raise("响应码异常！")
 
+    class WebsiteUser(HttpUser):
+        host = url
+        wait_time = constant(0.5)
+        tasks = [UserTasks]
+    
+    # setup Environment and Runner
+    env = Environment(user_classes=[WebsiteUser], events=events)
+    runner = env.create_local_runner()
+    # start a WebUI instance
+    # web_ui = env.create_web_ui(uri_port[0], uri_port[1])
+     
+    # execute init event handlers (only really needed if you have registered any)
+    env.events.init.fire(environment=env, runner=runner)
+    # start a greenlet that periodically outputs the current stats
+    gevent.spawn(stats_printer(env.stats))
+
+    # start a greenlet that save current stats to history
+    gevent.spawn(stats_history, env.runner)
+
+    # start the test
+    # 攀升率为1, 通过10s完成0-20用户
+    # 攀升率为2, 通过5s完成0-20用户
+    
+    # 预计最大并发数（模拟过程到此RPS时稳定）
+    # max_rps = 100
+    # 攀升时间(s)，从第一个用户到用户数（最大并发数的一半）需要多少秒
+    # spawn_time = 15
+
+    spawn_rate = (max_rps / spawn_time) * 0.5  
+    runner.start(max_rps, spawn_rate)
+
+    # in 60 seconds stop the runner
+    gevent.spawn_later(time_limit, lambda: runner.quit())
+
+    # wait for the greenlets
+    runner.greenlet.join()
+
+    # stop the web server for good measures
+    #web_ui.stop()
+    #comm = f"locust -f {os.path.abspath(__file__)} --host {url} --web-host={uri_port[0]} --web-port={uri_port[1]}"
+    #os.system(comm)
 if __name__ == "__main__":
     main()
