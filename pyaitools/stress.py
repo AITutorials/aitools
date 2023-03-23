@@ -33,9 +33,6 @@ def load_package_from_path(pkg_path: str, config_name) -> ModuleType:
 
 def main():
     parser = argparse.ArgumentParser(add_help=True)
-    #parser.add_argument(
-    #    "--uri", "-u", required=True, help="本地浏览器打开地址", default="0.0.0.0:80"
-    #)
     parser.add_argument("--config", "-c", required=True, help="压测服务的配置文件名")
     args = parser.parse_args()
     config = args.config
@@ -45,7 +42,7 @@ def main():
     from stress_config import (
         url,
         request_body,
-        max_rps,
+        max_user,
         spawn_time,
         time_limit,
     )
@@ -77,16 +74,8 @@ def main():
     gevent.spawn(stats_history, env.runner)
 
     # start the test
-    # 攀升率为1, 通过10s完成0-20用户
-    # 攀升率为2, 通过5s完成0-20用户
-    
-    # 预计最大并发数（模拟过程到此RPS时稳定）
-    # max_rps = 100
-    # 攀升时间(s)，从第一个用户到用户数（最大并发数的一半）需要多少秒
-    # spawn_time = 15
-
-    spawn_rate = (max_rps / spawn_time) * 0.5  
-    runner.start(max_rps, spawn_rate)
+    spawn_rate = (max_user / spawn_time) * 0.5  
+    runner.start(max_user, spawn_rate)
 
     # in 60 seconds stop the runner
     gevent.spawn_later(time_limit, lambda: runner.quit())
@@ -96,7 +85,5 @@ def main():
 
     # stop the web server for good measures
     #web_ui.stop()
-    #comm = f"locust -f {os.path.abspath(__file__)} --host {url} --web-host={uri_port[0]} --web-port={uri_port[1]}"
-    #os.system(comm)
 if __name__ == "__main__":
     main()
