@@ -398,7 +398,7 @@ pip install locust==2.15.1
 	* 必须下载以下版本以上才有该功能!
 
 ```shell
-pip install pyaitools==1.4.16
+pip install pyaitools==1.4.17
 ```
 
 
