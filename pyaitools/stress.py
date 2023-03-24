@@ -34,23 +34,33 @@ def load_package_from_path(pkg_path: str, config_name) -> ModuleType:
 def main():
     parser = argparse.ArgumentParser(add_help=True)
     parser.add_argument("--config", "-c", required=True, help="压测服务的配置文件名")
+    parser.add_argument("--dynamic", "-d", required=False, action="store_true", help="存在该参数使用动态请求体")
     args = parser.parse_args()
     config = args.config
+    dynamic = args.dynamic
     path = os.getcwd()
     import sys
     sys.path.append(path)
-    from stress_config import (
-        url,
-        request_body,
-        max_user,
-        spawn_time,
-        time_limit,
-    )
+
+    from stress_config import max_user, spawn_time, time_limit
+   
+    if dynamic:
+        print("正在使用动态请求体...")
+        from stress_config import RequestBody 
+        url = RequestBody().url
+    else:
+        from stress_config import request_body
+        url = request_body.get("url")
+        rb = request_body
+
+
 
     class UserTasks(TaskSet):
         @task
         def get_root(self):
-            res = self.client.request(**request_body)
+            if dynamic:
+                 rb = RequestBody().dynamic()
+            res = self.client.request(**rb)
             if res.status_code != 200:
                 raise("响应码异常！")
 

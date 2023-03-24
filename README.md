@@ -424,6 +424,10 @@ pip install pyaitools==1.4.19
 ```shell
 # -c/--config: 压测服务的配置文件路径 
 luc -c stress_config.py
+
+
+# -d/--dynamic: 是否使用动态请求体，若使用需要配置动态类
+luc -c stress_config.py --dynamic
 ```
 
 
@@ -440,6 +444,22 @@ url = "http://8.142.6.226/lp/text_compare/"
 request_body = {"method": "POST", "url": url, "json": sample}
 
 
+"""使用动态请求体时，需使用下面的类，并自定义dynamic函数内容
+import time
+class RequestBody():
+    def __init__(self):
+        """静态部分在初始化函数中设置即可"""
+        self.method = "POST"
+        self.url = "http://8.142.6.226/lp/text_compare/"
+        self.json = sample
+    def dynamic(self):
+        """动态部分通过函数表达"""
+        self.json["time"] = int(time.time())
+        return {"method": self.method, "url": self.url, "json": self.json}
+"""
+
+
+
 #### 压力测试的相关配置
 
 # 设置最大用户数
@@ -451,7 +471,7 @@ spawn_time = 10
 # 总体时间
 time_limit = 300
 
-## 注意：不要修改url，request_body，time_limiti等这些名字，只需要更改值就可以了
+## 注意：不要修改url，request_body，time_limit，RequestBody，dynamic等这些名字，只需要更改值就可以了
 ```
 
 > * 输出：
