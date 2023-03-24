@@ -27,7 +27,8 @@ setup(
     entry_points={
         'console_scripts': [
             'god=pyaitools.guard:run',
-            'luc=pyaitools.stress:main'
+            'luc=pyaitools.stress:main',
+            'sm=pyaitools.mail:send_mail'
         ],
        }   
 

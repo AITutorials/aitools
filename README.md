@@ -431,40 +431,49 @@ luc -c stress_config.py --dynamic
 ```
 
 
-> * stress_config.py
+> * stress_config.py（配置文件名字可以更改）
 
 ```python
 # 导入测试用例
 from sample import sample
+
 # 目标服务的请求地址
 url = "http://8.142.6.226/lp/text_compare/"
+
 # 请求体可以包含以下参数：（参考requests）method，url，headers，files，data，params，auth，cookies，hooks，json
 request_body = {"method": "POST", "url": url, "json": sample}
 
-'''使用动态请求体时，需使用下面的类，并自定义dynamic函数内容
-import time
-class RequestBody():
-    def __init__(self):
-        """静态部分在初始化函数中设置即可"""
-        self.method = "POST"
-        self.url = "http://8.142.6.226/lp/text_compare/"
-        self.json = sample
-    def dynamic(self):
-        """动态部分通过函数表达"""
-        self.json["time"] = int(time.time())
-        return {"method": self.method, "url": self.url, "json": self.json}
-'''
-
-#### 压力测试的相关配置
 # 设置最大用户数
 max_user = 8
+
 # 攀升时间
 spawn_time = 10
+
 # 总体时间
 time_limit = 300
 
 ## 注意：不要修改url，request_body，time_limit，RequestBody，dynamic等这些名字，只需要更改值就可以了
 ```
+
+> * 如果你的请求体是动态的（一些参数是变化的，比如token），在配置中使用下面的类
+
+```python
+from sample import sample
+url = "http://8.142.6.226/lp/text_compare/"
+
+import time
+class RequestBody():
+    def __init__(self):
+        """静态部分在初始化函数中设置即可"""
+        self.url = url
+        self.method = "POST"
+        self.json = sample
+    def dynamic(self):
+        """动态部分通过函数表达"""
+        self.json["time"] = int(time.time())
+        return {"method": self.method, "url": self.url, "json": self.json}
+```
+
 
 > * 输出：
 
@@ -498,3 +507,61 @@ Type     Name                                                                   
 POST     /lp/text_compare/                                                               28     0(0.00%) |    239     194     326    200 |    2.33        0.00
 --------|--------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
          Aggregated                                                                      28     0(0.00%) |    239     194     326    200 |    2.33        0.00```
+
+
+
+
+---
+
+### 六，快速发送邮件
+
+
+#### 1, 快速使用
+
+
+* 下载：
+	* 必须下载以下版本以上才有该功能!
+
+```shell
+pip install pyaitools==1.4.21
+```
+
+
+* 使用：
+	* 当你下载完这个工具包之后，你将得到shell命令：sm
+
+```shell
+# -c/--config: 压测服务的配置文件路径 
+sm -c mail_config.py
+```
+
+
+> * mail_config.py（配置文件名字可以更改）
+
+
+```python
+# 使用哪个邮箱发送邮件，可以是163/qq等
+sender_dict = {
+        'host': 'smtp.163.com',
+        'port': '465',
+        'user': 'xxxxxx@163.com',
+        'passwd': '********'
+    }
+
+# 把邮件发送给谁，这是一个列表，可以添加多个邮箱
+mailto_list = ['15242200221@163.com']
+
+# 邮件的标题，默认为【测试邮件】
+title = '【测试邮件】'
+
+# 邮件内容，默认为空值
+content = '请查看附件中的数据'
+
+# 邮件的附件路径，如果没有附件可以删掉此参数
+attachment = ['./xxx.png', './xxx.txt']
+
+# 内容格式，当你需要更丰富的格式时可以使用html，否则可以删掉此参数
+content_type = 'html'
+```
+
+---
