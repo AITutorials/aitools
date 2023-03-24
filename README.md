@@ -436,13 +436,10 @@ luc -c stress_config.py --dynamic
 ```python
 # 导入测试用例
 from sample import sample
-
 # 目标服务的请求地址
 url = "http://8.142.6.226/lp/text_compare/"
-
 # 请求体可以包含以下参数：（参考requests）method，url，headers，files，data，params，auth，cookies，hooks，json
 request_body = {"method": "POST", "url": url, "json": sample}
-
 
 '''使用动态请求体时，需使用下面的类，并自定义dynamic函数内容
 import time
@@ -458,16 +455,11 @@ class RequestBody():
         return {"method": self.method, "url": self.url, "json": self.json}
 '''
 
-
-
 #### 压力测试的相关配置
-
 # 设置最大用户数
 max_user = 8
-
 # 攀升时间
 spawn_time = 10
-
 # 总体时间
 time_limit = 300
 
