@@ -414,7 +414,7 @@ pip install locust==2.15.1
 	* 必须下载以下版本以上才有该功能!
 
 ```shell
-pip install pyaitools==1.4.19
+pip install pyaitools==1.4.20
 ```
 
 
@@ -444,7 +444,7 @@ url = "http://8.142.6.226/lp/text_compare/"
 request_body = {"method": "POST", "url": url, "json": sample}
 
 
-"""使用动态请求体时，需使用下面的类，并自定义dynamic函数内容
+'''使用动态请求体时，需使用下面的类，并自定义dynamic函数内容
 import time
 class RequestBody():
     def __init__(self):
@@ -456,7 +456,7 @@ class RequestBody():
         """动态部分通过函数表达"""
         self.json["time"] = int(time.time())
         return {"method": self.method, "url": self.url, "json": self.json}
-"""
+'''
 
 
 
