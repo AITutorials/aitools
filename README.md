@@ -44,7 +44,7 @@
 
 
 * 下载：
-	* 必须下载以下版本以上才有语料检测功能!
+	* 至少下载以下版本才有该功能!
 
 ```shell
 pip install pyaitools==1.4.6
@@ -132,7 +132,7 @@ pip install networkx==2.3
 
 
 * 下载：
-	* 必须下载以下版本以上才有该功能!
+	* 至少下载以下版本才有该功能!
 
 ```shell
 pip install pyaitools==1.4.8
@@ -212,7 +212,7 @@ print(c_list)
 #### 3, 快速使用
 
 * 下载：
-	* 必须下载以下版本以上才有该功能!
+	* 至少下载以下版本才有该功能!
 
 ```shell
 pip install pyaitools==1.4.10
@@ -333,7 +333,7 @@ pip install apscheduler==3.9.1
 
 
 * 下载：
-	* 必须下载以下版本以上才有该功能!
+	* 至少下载以下版本才有该功能!
 
 ```shell
 pip install pyaitools==1.4.13
@@ -411,7 +411,7 @@ pip install locust==2.15.1
 
 
 * 下载：
-	* 必须下载以下版本以上才有该功能!
+	* 至少下载以下版本才有该功能!
 
 ```shell
 pip install pyaitools==1.4.20
@@ -521,7 +521,7 @@ POST     /lp/text_compare/                                                      
 
 
 * 下载：
-	* 必须下载以下版本以上才有该功能!
+	* 至少下载以下版本才有该功能!
 
 ```shell
 pip install pyaitools==1.4.21
