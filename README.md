@@ -25,7 +25,7 @@
 
 * [五，AI服务压力测试工具](https://github.com/AITutorials/aitools#%E4%BA%94ai%E6%9C%8D%E5%8A%A1%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7)
 
-
+* [六，快速发送邮件](https://github.com/AITutorials/aitools#%E5%85%AD%E5%BF%AB%E9%80%9F%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6)
 
 ---
 ---
