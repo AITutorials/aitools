@@ -30,7 +30,9 @@ def main():
     max_user = stress_config["max_user"]
     spawn_time = stress_config["spawn_time"]
     time_limit = stress_config["time_limit"]
-    url = stress_config["url"]
+    bandwidth = stress_config.get("bandwidth", 0)
+    url = stress_config.get("url", "http://0.0.0.0")
+
 
     
     class UserTasks(TaskSet):
@@ -40,9 +42,21 @@ def main():
                 rb = stress_config["RequestBody"]().dynamic()
             else:
                 rb = stress_config["request_body"]
+                
             res = self.client.request(**rb)
             if res.status_code != 200:
                 raise Exception(res.text)
+            else:
+                if bandwidth:
+                    # 计算请求体字节数（受带宽影响）
+                    body_byte = int(res.headers["Content-Length"]) 
+                    if body_byte > int(bandwidth):
+                        print(f"带宽报警：当前请求体大小为:{body_byte}个字节，"\
+                                "若需要关闭此日志，将bandwidth设置为0")
+                    else:
+                        pass
+                else:
+                    pass
 
     class WebsiteUser(HttpUser):
         host = url

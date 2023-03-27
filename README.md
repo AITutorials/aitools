@@ -414,7 +414,7 @@ pip install locust==2.15.1
 	* 至少下载以下版本才有该功能!
 
 ```shell
-pip install pyaitools==1.4.22
+pip install pyaitools==1.4.23
 ```
 
 
@@ -451,6 +451,10 @@ spawn_time = 10
 
 # 总体时间
 time_limit = 300
+
+
+# 带宽报警阈值, 单位字节，默认为0（不报警）
+bandwidth = 2000000
 
 ## 注意：不要修改url，request_body，time_limit，RequestBody，dynamic等这些名字，只需要更改值就可以了
 ```
