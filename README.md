@@ -524,7 +524,7 @@ POST     /lp/text_compare/                                                      
 	* 至少下载以下版本才有该功能!
 
 ```shell
-pip install pyaitools==1.4.21
+pip install pyaitools==1.4.22
 ```
 
 

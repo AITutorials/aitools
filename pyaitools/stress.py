@@ -13,9 +13,8 @@ from locust.env import Environment
 from locust.stats import stats_printer, stats_history
 from locust.log import setup_logging
 from . import utils
-
+import traceback
 setup_logging("INFO", None)
-
 
 def main():
     parser = argparse.ArgumentParser(add_help=True)
@@ -43,7 +42,7 @@ def main():
                 rb = stress_config["request_body"]
             res = self.client.request(**rb)
             if res.status_code != 200:
-                raise ("响应码异常！")
+                raise Exception(res.text)
 
     class WebsiteUser(HttpUser):
         host = url
