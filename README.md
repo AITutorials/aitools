@@ -127,7 +127,7 @@ sentence1,sentence2,relation
 * 依赖：
 
 ```shell
-pip install networkx==2.3 
+pip install numpy==1.21.6 
 ```
 
 
@@ -135,7 +135,7 @@ pip install networkx==2.3
 	* 至少下载以下版本才有该功能!
 
 ```shell
-pip install pyaitools==1.4.8
+pip install pyaitools==1.4.24
 ```
 
 
@@ -149,7 +149,13 @@ input_list = ["A","B","C","A"]
 # 与input_list具有1vs1相似关系的文本
 # 如："A"与"a"是相似的，"B"与"b"是相似的等等
 similar_input_list = ["a","b","c","b"]
-c_list = similar.find_connected_area(input_list, similar_input_list)
+
+# 我们把它们做成集合-列表的形式[{"A", "a"}, {"B", "b"}, {"C", "c"}, ...]
+list_set = list(zip(input_list, similar_input_list))
+list_set  = list(map(lambda x: set(x), list_set))
+
+# connected_area_min_num: 输出连通区域（集合）中最少的文本数量，为了避免输出内容过多，可以通过该参数进行过滤，少于该长度的集合将不会输出，默认为0
+c_list = similar.find_connected_area(list_set, connected_area_min_num=2)
 print(c_list)
 ```
 
@@ -162,10 +168,6 @@ print(c_list)
 
 ![](./img/s1.png)
 
-* 参数：
-> * input_list: 必须写, 文本组成的列表，相似文本对的一部分
-> * similar_input_list: 必须写, 文本组成的列表，相似文本对的另外一部分
-> * connected_area_min_num: 输出连通区域（集合）中最少的文本数量，为了避免输出内容过多，可以通过该参数进行过滤，少于该数字的集合将不会输出，默认为0
 
 ---
 
