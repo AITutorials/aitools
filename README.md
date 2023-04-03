@@ -600,7 +600,8 @@ pip install pyaitools==1.4.25
 ```python
 from pyaitools import plot
 
-# 配置信息
+# 配置信息如下：
+
 # Y轴的数据列表，嵌套列表形式，分别对应第N条线
 y_axis_data = [[0.1, 0.2, 0.3], [0.4, 0.5, 0.6]]
 leng = len(y_axis_data)
