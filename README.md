@@ -571,3 +571,84 @@ content_type = 'html'
 ```
 
 ---
+
+
+### 六，绘制多折线对比图
+
+
+#### 1, 快速使用
+
+
+
+* 依赖：
+
+```shell
+pip install matplotlib==3.1.0
+```
+
+
+* 下载：
+	* 至少下载以下版本才有该功能!
+
+```shell
+pip install pyaitools==1.4.25
+```
+
+
+* 使用：
+
+```python
+from pyaitools import plot
+
+# 配置信息
+# Y轴的数据列表，嵌套列表形式，分别对应第N条线
+y_axis_data = [[0.1, 0.2, 0.3], [0.4, 0.5, 0.6]]
+leng = len(y_axis_data)
+# X轴的数据列表，注意它并不是嵌套列表，因为多折现对比图要求其横坐标内容一致
+x_axis_data = ["V1", "V2", "V3"]
+# X轴名字
+x_axis_name = ""
+# Y轴名字
+y_axis_name = "Price"
+# x轴内容旋转角度，只有当其内容为字符串时才会旋转
+x_axis_rotation = 30
+# y轴内容旋转角度，只有当其内容为字符串时才会旋转
+y_axis_rotation = 0
+# 线宽
+line_width = [2] * leng
+# 线颜色
+line_color = ["b", "r"]
+# 线名字
+line_name = ["line1", "line2"]
+# 线透明度
+line_alpha = [0.5] * leng
+# 线盒子的位置 
+legend_loc = "upper left"
+# 是否使用表格线, 默认为True
+is_grid = True
+# 是否在折点处显示Y坐标, 默认为True
+show_Y = True
+# 是否在折点处显示X坐标, 默认为False
+show_X = False
+# 保存图片路径
+save_path = "multiline.png"
+
+plot.multiline_plot(
+    x_axis_data,
+    y_axis_data,
+    x_axis_name,
+    y_axis_name,
+    x_axis_rotation,
+    y_axis_rotation,
+    line_width,
+    line_color,
+    line_name,
+    line_alpha,
+    legend_loc,
+    save_path
+    )
+```
+
+![]()
+
+---
