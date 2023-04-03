@@ -650,6 +650,6 @@ plot.multiline_plot(
     )
 ```
 
-![]()
+![](./img/multiline.png)
 
 ---
