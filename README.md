@@ -591,7 +591,7 @@ pip install matplotlib==3.1.0
 	* 至少下载以下版本才有该功能!
 
 ```shell
-pip install pyaitools==1.4.25
+pip install pyaitools==1.4.26
 ```
 
 
@@ -623,6 +623,8 @@ line_color = ["b", "r"]
 line_name = ["line1", "line2"]
 # 线透明度
 line_alpha = [0.5] * leng
+# 折点样式
+marker = [""] * leng
 # 线盒子的位置 
 legend_loc = "upper left"
 # 是否使用表格线, 默认为True
@@ -645,6 +647,7 @@ plot.multiline_plot(
     line_color,
     line_name,
     line_alpha,
+    marker,
     legend_loc,
     save_path
     )

@@ -14,6 +14,7 @@ def multiline_plot(
     line_color,
     line_name,
     line_alpha,
+    marker,
     legend_loc,
     save_path,
     is_grid=True,
@@ -58,6 +59,7 @@ def multiline_plot(
         ax.plot(
             x_p,
             y_p[i],
+            marker=marker[i],
             linewidth=line_width[i],
             label=line_name[i],
             color=line_color[i],
@@ -126,6 +128,7 @@ if __name__ == "__main__":
     line_color = ["b", "r", "g"]
     line_name = ["50V", "100V", "250V"]
     line_alpha = [0.5] * 3
+    marker = ["*"] * 3
     legend_loc = "upper left"
     is_grid = True
     show_Y = True
@@ -142,6 +145,7 @@ if __name__ == "__main__":
         line_color,
         line_name,
         line_alpha,
+        marker,
         legend_loc,
         save_path,
     )
