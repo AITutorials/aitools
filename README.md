@@ -27,6 +27,8 @@
 
 * [六，快速发送邮件](https://github.com/AITutorials/aitools#%E5%85%AD%E5%BF%AB%E9%80%9F%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6)
 
+* [七，绘制多折线对比图](https://github.com/AITutorials/aitools#%E4%B8%83%E7%BB%98%E5%88%B6%E5%A4%9A%E6%8A%98%E7%BA%BF%E5%AF%B9%E6%AF%94%E5%9B%BE)
+
 ---
 ---
 ---
