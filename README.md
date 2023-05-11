@@ -683,9 +683,9 @@ pip install pyaitools==1.4.27
 
 ```python
 # 需要检查性能的函数（示例）
-def count(num):
+def count(n):
     c = 0
-    for i in range(0, num):
+    for i in range(0, n):
         print(i)
         c += 1
     return c
@@ -697,7 +697,7 @@ count(num)
 # 对目标函数进行性能分析
 from pyaitools import pprofile
 
-# 运行函数的字符串形式
+# 定义函数的字符串形式
 func_str = "count(num)"    
 
 # 结果将直接打印在控制台上
