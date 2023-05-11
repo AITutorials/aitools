@@ -691,7 +691,8 @@ def count(num):
 
 num = 1000
 c = count(num)
-
+```
+```python
 # 对目标函数进行性能分析
 from pyaitools import pprofile
 
