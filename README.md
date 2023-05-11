@@ -684,13 +684,14 @@ pip install pyaitools==1.4.27
 ```python
 # 目标函数
 def count(num):
+    c = 0
     for i in range(0, num):
         print(i)
         c += 1
     return c
 
-num = 1000
-c = count(num)
+num = 100000
+count(num)
 ```
 ```python
 # 对目标函数进行性能分析
@@ -702,40 +703,24 @@ func_str = "count(num)"
 # 结果将直接打印在控制台上
 # top控制打印前多少行
 top = 20
-pprofile.show_runtime(fun_str, top)
+pprofile.show_runtime(func_str, top)
 ```
 
 > * 输出：
 
 ```text
-Thu May 11 11:10:43 2023    restat.bin
+Thu May 11 12:36:59 2023    restat.bin
 
-         1793337 function calls (1766318 primitive calls) in 1.283 seconds
+         100004 function calls in 0.522 seconds
 
    Ordered by: internal time
-   List reduced from 131 to 20 due to restriction <20>
 
    ncalls  tottime  percall  cumtime  percall filename:lineno(function)
-        1    0.269    0.269    0.918    0.918 /data/DEServer/app_lp_az.py:276(az_process)
-    16000    0.103    0.000    0.120    0.000 /root/anaconda3/envs/deepke/lib/python3.8/site-packages/jieba/__init__.py:180(get_DAG)
-   177000    0.092    0.000    0.134    0.000 /root/anaconda3/envs/deepke/lib/python3.8/site-packages/jieba/__init__.py:177(<genexpr>)
-    55000    0.061    0.000    0.499    0.000 /root/anaconda3/envs/deepke/lib/python3.8/site-packages/jieba/__init__.py:249(__cut_DAG)
-    64000    0.056    0.000    0.600    0.000 /root/anaconda3/envs/deepke/lib/python3.8/site-packages/jieba/__init__.py:289(cut)
-    16000    0.055    0.000    0.242    0.000 /root/anaconda3/envs/deepke/lib/python3.8/site-packages/jieba/__init__.py:172(calc)
-    82000    0.052    0.000    0.189    0.000 {built-in method builtins.max}
-2000/1000    0.050    0.000    0.084    0.000 /root/anaconda3/envs/deepke/lib/python3.8/copy.py:226(_deepcopy_dict)
-     6000    0.047    0.000    0.047    0.000 {built-in method builtins.print}
-   370000    0.041    0.000    0.041    0.000 {method 'replace' of 'str' objects}
-    33000    0.033    0.000    0.033    0.000 {method 'split' of 're.Pattern' objects}
-   200019    0.032    0.000    0.032    0.000 {method 'get' of 'dict' objects}
-     3000    0.030    0.000    0.049    0.000 /data/DEServer/app_lp_az.py:199(__text_process2)
-   119000    0.029    0.000    0.029    0.000 {built-in method math.log}
-     2000    0.026    0.000    0.374    0.000 /data/DEServer/app_lp_az.py:154(get_zj)
-    64000    0.025    0.000    0.025    0.000 {method 'match' of 're.Pattern' objects}
-     2000    0.024    0.000    0.046    0.000 /data/DEServer/app_lp_az.py:137(text_preprocess)
-     2000    0.024    0.000    0.343    0.000 /data/DEServer/app_lp.py:107(get_zy)
-  23002/1    0.021    0.000    0.087    0.087 /root/anaconda3/envs/deepke/lib/python3.8/copy.py:128(deepcopy)
-    19000    0.017    0.000    0.071    0.000 /root/anaconda3/envs/deepke/lib/python3.8/site-packages/jieba/finalseg/__init__.py:85(cut)
+   100000    0.480    0.000    0.480    0.000 {built-in method builtins.print}
+        1    0.042    0.042    0.522    0.522 test.py:3(count)
+        1    0.000    0.000    0.522    0.522 {built-in method builtins.exec}
+        1    0.000    0.000    0.522    0.522 <string>:1(<module>)
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
 ```
 
 
