@@ -682,7 +682,7 @@ pip install pyaitools==1.4.27
 * 使用：
 
 ```python
-# 目标函数
+# 需要检查性能的函数（示例）
 def count(num):
     c = 0
     for i in range(0, num):
